@@ -1,0 +1,17 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: 0;
+}
+
+body {
+    height: 100vh;
+    background: rgb(33,4,70);
+    background: linear-gradient(42deg, rgb(19, 0, 44) 0%, rgba(0,14,93,1) 100%);
+    background-repeat: no-repeat;
+}
+
+button {
+    cursor: pointer;
+}
