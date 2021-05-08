@@ -8,11 +8,14 @@ export function Todos () {
 
     const TodoContexts = React.useContext(TodoContext);
     const [currentTodos, setCurrentTodos] = React.useState([]);
+    const todoRef = React.useRef();
 
+    //Verificar cada mudança no estado das todos e modificar o array de todos
     React.useEffect(() => {
         setCurrentTodos(TodoContexts.todoList);
     }, [TodoContexts.todoList]);
 
+    // Remover todo verificando o conteúdo
     function removeTodo ({target}) {
         const newArray = [];
         
@@ -27,13 +30,19 @@ export function Todos () {
         return true;
     };
 
+    // Buscar cada elemento e riscar conforme clicar no botão de done
+    function doneTodo ({target}) {
+        target.parentNode.parentNode.childNodes[0].style.color = 'grey';
+        target.parentNode.parentNode.childNodes[0].style.textDecoration = 'line-through';
+    };
+
     return (
         <TodosContainer>
             {
                 currentTodos.map((todo, index) => {
                     return (
                         <TodoCard>
-                            <TodoCardTitle>{todo}</TodoCardTitle>
+                            <TodoCardTitle ref={todoRef}>{todo}</TodoCardTitle>
                             <TodoRemoveButton
                                 key={todo + index} 
                                 content={todo}
@@ -47,8 +56,13 @@ export function Todos () {
                                 />
                             </TodoRemoveButton>
             
-                            <TodoDoneButton>
-                                <ButtonIcon src={DoneButtonSrc} />
+                            <TodoDoneButton
+                                onClick={doneTodo}
+                            >
+                                <ButtonIcon 
+                                    src={DoneButtonSrc} 
+                                    onClick={doneTodo}
+                                />
                             </TodoDoneButton>
                         </TodoCard>
                     )

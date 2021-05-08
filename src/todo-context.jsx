@@ -18,7 +18,7 @@ export function TodoProvider ({children}) {
 
         return true;
     };
-    
+
     return (
         <TodoContext.Provider value={{
             todoList,
